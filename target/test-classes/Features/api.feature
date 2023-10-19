@@ -1,5 +1,7 @@
+@regression
 Feature: Rest-assured API functionality
 
+  @sanity
   Scenario: Get API request
     Given The API endpoint is "https://reqres.in/api"
     When A GET request is sent

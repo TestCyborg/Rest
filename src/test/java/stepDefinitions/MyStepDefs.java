@@ -12,7 +12,6 @@ import org.junit.Assert;
 import java.io.File;
 
 import static io.restassured.RestAssured.*;
-
 public class MyStepDefs {
     @Given("The API endpoint is {string}")
     public void theAPIEndpointIs(String url) {
@@ -27,7 +26,6 @@ public class MyStepDefs {
     public void statusResponseIs(int arg0) {
         Response response = given().baseUri("https://reqres.in/api").and().basePath("/users?page=2").when().get().thenReturn();
         int status = response.getStatusCode();
-
         if(status == arg0)
         {
             Assert.assertTrue(true);
@@ -37,7 +35,6 @@ public class MyStepDefs {
             Assert.assertTrue(false);
         }
     }
-
     @When("A POST request is sent")
     public void aPOSTRequestIsSent() {
         //Json File
@@ -45,10 +42,8 @@ public class MyStepDefs {
         JsonPath jsonPath = new JsonPath(file);
         String Name = jsonPath.getString("Name");
         String Title = jsonPath.getString("Title");
-
         System.out.println(Name);
         System.out.println(Title);
-
         given()
                 .body(Name)
                 .body(Title)
@@ -57,9 +52,7 @@ public class MyStepDefs {
                 .then()
                 .log()
                 .status();
-
     }
-
     @Then("Status response is {int} for post")
     public void statusResponseIsForPost(int arg0) {
         File file = new File("C:\\Users\\dialt\\OneDrive\\Desktop\\APITest.json");
@@ -67,9 +60,7 @@ public class MyStepDefs {
         String Name = jsonPath.getString("Name");
         String Title = jsonPath.getString("Title");
         Response response = given().body(Name).body(Title).when().post("/users").thenReturn();
-
         int status = response.getStatusCode();
-
         if(status == arg0)
         {
             Assert.assertTrue(true);
